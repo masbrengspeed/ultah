@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Ulang Tahun - Happy Birthday!</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           GLOBAL STYLES & RESET
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Palet Warna Modern - Ganti sesuai keinginan */
+            --primary-color: #fc7fa9;      /* Pink coral untuk nuansa meriah */
+            --secondary-color: #C44569;    /* Rose untuk aksen */
+            --accent-color: #FFC837;       /* Gold untuk highlight */
+            --bg-light: #FFF5F7;
+            --bg-dark: #2C1E3F;
+            --text-dark: #2C1E3F;
+            --text-light: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* ============================================
+           KONFETI ANIMASI (Pure CSS)
+           ============================================ */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-color);
+            top: -10%;
+            animation: confetti-fall 5s linear infinite;
+        }
+
+        .confetti:nth-child(1) { left: 10%; animation-delay: 0s; background: var(--primary-color); }
+        .confetti:nth-child(2) { left: 20%; animation-delay: 0.5s; background: var(--accent-color); }
+        .confetti:nth-child(3) { left: 30%; animation-delay: 1s; background: var(--secondary-color); }
+        .confetti:nth-child(4) { left: 40%; animation-delay: 1.5s; background: var(--primary-color); }
+        .confetti:nth-child(5) { left: 50%; animation-delay: 2s; background: var(--accent-color); }
+        .confetti:nth-child(6) { left: 60%; animation-delay: 2.5s; background: var(--secondary-color); }
+        .confetti:nth-child(7) { left: 70%; animation-delay: 3s; background: var(--primary-color); }
+        .confetti:nth-child(8) { left: 80%; animation-delay: 3.5s; background: var(--accent-color); }
+        .confetti:nth-child(9) { left: 90%; animation-delay: 4s; background: var(--secondary-color); }
+        .confetti:nth-child(10) { left: 15%; animation-delay: 4.5s; background: var(--primary-color); }
+        .confetti:nth-child(11) { left: 25%; animation-delay: 0.3s; background: var(--accent-color); }
+        .confetti:nth-child(12) { left: 35%; animation-delay: 1.3s; background: var(--secondary-color); }
+        .confetti:nth-child(13) { left: 45%; animation-delay: 2.3s; background: var(--primary-color); }
+        .confetti:nth-child(14) { left: 55%; animation-delay: 3.3s; background: var(--accent-color); }
+        .confetti:nth-child(15) { left: 65%; animation-delay: 4.3s; background: var(--secondary-color); }
+        .confetti:nth-child(16) { left: 75%; animation-delay: 0.8s; background: var(--primary-color); }
+        .confetti:nth-child(17) { left: 85%; animation-delay: 1.8s; background: var(--accent-color); }
+        .confetti:nth-child(18) { left: 95%; animation-delay: 2.8s; background: var(--secondary-color); }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Bintang berkilau */
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-color);
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .star:nth-child(odd) { animation-delay: 0.5s; }
+        .star:nth-child(even) { animation-delay: 1s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* ============================================
+           HEADER SECTION
+           ============================================ */
+        header {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            overflow: hidden;
+            animation: bg-shift 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes bg-shift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 2rem;
+            animation: hero-entrance 1.5s ease-out;
+        }
+
+        @keyframes hero-entrance {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            border: 8px solid var(--accent-color);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: photo-entrance 1.5s ease-out 0.3s backwards;
+        }
+
+        @keyframes photo-entrance {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(-180deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            animation: text-entrance 1.5s ease-out 0.6s backwards;
+        }
+
+        @keyframes text-entrance {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content .birthday-date {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            animation: text-entrance 1.5s ease-out 0.9s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--accent-color);
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(255, 200, 55, 0.4);
+            transition: all 0.3s ease;
+            animation: button-entrance 1.5s ease-out 1.2s backwards;
+        }
+
+        @keyframes button-entrance {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 200, 55, 0.6);
+        }
+
+        /* ============================================
+           GALLERY SECTION (CSS-only Slideshow)
+           ============================================ */
+        .gallery-section {
+            padding: 5rem 2rem;
+            background: var(--bg-light);
+            position: relative;
+        }
+
+        .gallery-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+        }
+
+        .slideshow-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            animation: slideshow 15s infinite;
+        }
+
+        .slide:nth-child(1) { animation-delay: 0s; }
+        .slide:nth-child(2) { animation-delay: 5s; }
+        .slide:nth-child(3) { animation-delay: 10s; }
+
+        @keyframes slideshow {
+            0% { opacity: 0; transform: scale(1.1); }
+            6.66% { opacity: 1; transform: scale(1); }
+            33.33% { opacity: 1; transform: scale(1); }
+            40% { opacity: 0; transform: scale(1.1); }
+            100% { opacity: 0; transform: scale(1.1); }
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ============================================
+           UCAPAN SECTION
+           ============================================ */
+        .ucapan-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(to bottom, var(--bg-light), #FFEEF3);
+            position: relative;
+        }
+
+        .ucapan-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 3rem;
+        }
+
+        .cards-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            opacity: 0;
+            animation: card-entrance 0.8s ease-out forwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.2s; }
+        .card:nth-child(2) { animation-delay: 0.4s; }
+        .card:nth-child(3) { animation-delay: 0.6s; }
+        .card:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes card-entrance {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) rotateX(-20deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg);
+            }
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .card .from {
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            font-style: italic;
+        }
+
+        /* ============================================
+           FOOTER SECTION
+           ============================================ */
+        footer {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer .heart {
+            color: var(--primary-color);
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* ============================================
+           AUDIO PLAYER STYLES
+           ============================================ */
+        .audio-notice {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent-color);
+            color: var(--text-dark);
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 1000;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content .birthday-date {
+                font-size: 1.2rem;
+            }
+
+            .photo-frame {
+                width: 150px;
+                height: 150px;
+            }
+
+            .slideshow-container {
+                height: 300px;
+            }
+
+            .gallery-section h2,
+            .ucapan-section h2 {
+                font-size: 2rem;
+            }
+
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================
+           ACCESSIBILITY: Reduced Motion
+           ============================================ */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Konfeti Dekoratif -->
+    <div class="confetti-container">
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="ballon"></div>
+    </div>
+
+    <!-- ============================================
+         HEADER / HERO SECTION
+         ============================================ -->
+    <header>
+        <div class="hero-content">
+            <!-- Foto Orang yang Berulang Tahun -->
+            <div class="photo-frame">
+                <img src="file/318aba88-716b-4cfb-be1f-e4e21b767118.jpg" alt="Foto Sarah - Yang Berulang Tahun">
+                <!-- GANTI: path/to/birthday-person.jpg dengan path foto asli -->
+            </div>
+
+            <h1>Happy Birthday</h1>
+            <h1>Aidah Kamila Sari</h1>
+            <p class="birthday-date">03 Desember 2007</p>
+            <!-- GANTI: Nama dan tanggal sesuai kebutuhan -->
+
+            <a href="#ucapan" class="cta-button">Lihat Ucapan</a>
+        </div>
+    </header>
+
+    <!-- ============================================
+         GALLERY SECTION (CSS-only Slideshow)
+         ============================================ -->
+    <section class="gallery-section">
+        <h2></h2>
+
+        <div class="slideshow-container">
+            <div class="slide">
+                <img src="file/d80f1c78-19e2-4b74-9ccd-42be4637f2b4.jpg" alt="Momen pesta 1">
+                <!-- GANTI: path/to/gallery-image-1.jpg dengan gambar asli (rekomendasi ukuran 1200x800px) -->
+            </div>
+            <div class="slide">
+                <img src="file/e55ee4e7-97f3-43c8-ac72-6d8d23542554.jpg" alt="Momen pesta 2">
+                <!-- GANTI: path/to/gallery-image-2.jpg dengan gambar asli -->
+            </div>
+            <div class="slide">
+                <img src="file/d1580f2c-6f02-42df-8e7a-1ebb095c495b.jpg" alt="Momen pesta 3">
+                <!-- GANTI: path/to/gallery-image-3.jpg dengan gambar asli -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         UCAPAN SECTION
+         ============================================ -->
+    <section id="ucapan" class="ucapan-section">
+        <h2>Ucapan Spesial</h2>
+
+        <div class="cards-container">
+            <div class="card">
+                <h3>🎊</h3>
+                <p>Selamat ulang tahun, adikku Aidah, tidak terasa kamu tumbuh semakin dewasa dari hari ke hari. Melihat perkembanganmu selama ini benar-benar membuatku bangga. Semoga di usia barumu ini, kamu selalu diberi kesehatan, kebahagiaan, dan kemudahan dalam setiap langkah.</p>
+                <p class="from">- </p>
+            </div>
+
+            <div class="card">
+                <h3>🎉</h3>
+                <p>Di usiamu yang baru, kakak berdoa semoga Allah melapangkan setiap jalan hidupmu. Semoga langkah-langkahmu selalu dipenuhi keberkahan, dijauhkan dari segala bahaya, dan dipertemukan dengan kesempatan-kesempatan baik yang dapat mengangkat derajatmu. Semoga Allah memudahkanmu dalam belajar, dalam mencapai cita-cita, serta menjadikanmu anak yang shaliha dan berakhlak mulia.</p>
+                <p class="from">- </p>
+            </div>
+
+            <div class="card">
+                <h3>🎊</h3>
+                <p>Di hari istimewamu ini, aku berdoa semoga segala kebaikan selalu mengiringimu. Semoga apa pun yang kamu cita-citakan bisa tercapai, dan semua jalan yang kamu pilih selalu diberi kelancaran. Ingatlah, kamu tidak pernah berjalan sendiri — keluarga selalu ada untukmu.</p>
+                <p class="from">- </p>
+            </div>
+
+            <div class="card">
+                <h3>🎉</h3>
+                <p>Terima kasih sudah menjadi adik yang menyenangkan, yang selalu bisa bikin suasana rumah terasa hidup. Kebahagiaanmu juga kebahagiaan kami semua. Semoga tahun ini membawa lebih banyak senyum, pengalaman baru, dan kesempatan besar untukmu.</p>
+                <p class="from">- </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER SECTION
+         ============================================ -->
+    <footer>
+        <p>Made with <span class="heart">♥</span> from your mas Dani Ganteng</p>
+        <p>&copy; 2025 Happy Birthday</p>
+    </footer>
+
+    <!-- ============================================
+         AUDIO BACKGROUND MUSIC
+         ============================================ -->
+    <!--
+        PENTING: Musik autoplay mungkin diblokir oleh browser modern (Chrome, Firefox, Safari)
+        karena kebijakan autoplay mereka. Musik akan otomatis diputar HANYA jika pengguna
+        telah berinteraksi dengan halaman (klik/scroll).
+
+        SOLUSI: Jika autoplay tidak bekerja, tampilkan tombol "Play Music" yang jelas
+        agar pengunjung dapat memulai musik secara manual.
+
+        GANTI: path/to/music.mp3 dengan file musik asli Anda (format MP3/OGG)
+    -->
+    <audio class="audio-player" autoplay loop>
+        <source src="file/mabruk-alfa-mabruk-syahla-cover-wnq10dxv2tg_1zvSYV2J.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Notifikasi Audio (opsional - hapus jika tidak diperlukan) -->
+    <div class="audio-notice">
+        🎵
+    </div>
+
+    <!--
+    ============================================
+    CATATAN UNTUK EDITOR:
+    ============================================
+
+    1. GAMBAR: Ganti semua placeholder "path/to/..." dengan path gambar asli Anda.
+       - Rekomendasi: Kompres gambar ke ukuran optimal (max 500KB per gambar).
+       - Format: JPG untuk foto, PNG untuk ilustrasi dengan transparansi.
+
+    2. WARNA: Edit variabel CSS di :root untuk mengubah skema warna keseluruhan.
+       - --primary-color: Warna utama
+       - --secondary-color: Warna pendukung
+       - --accent-color: Warna aksen/highlight
+
+    3. FONT: Jika ingin mengganti font, edit URL Google Fonts di <head>.
+
+    4. MUSIK: Browser modern (Chrome, Firefox, Safari) sering MEMBLOKIR autoplay audio
+       sampai pengguna melakukan interaksi pertama (klik/ketuk di mana saja).
+       Jika autoplay tidak berfungsi, pertimbangkan menambahkan tombol play yang jelas.
+
+    5. KONTEN: Edit teks nama, tanggal, dan ucapan sesuai kebutuhan Anda.
+
+    6. RESPONSIF: Layout sudah dioptimalkan untuk mobile, tablet, dan desktop.
+       Test di berbagai ukuran layar untuk memastikan tampilan sempurna.
+
+    File ini 100% HTML + CSS, tanpa JavaScript. Semua animasi dan interaksi
+    menggunakan CSS murni (@keyframes, transitions, pseudo-classes).
+
+    ============================================
+    -->
+
+    <script>
+    window.addEventListener("load", function(){
+        var audio = document.querySelector(".audio-player");
+        var playPromise = audio.play();
+
+        if (playPromise !== undefined){
+            playPromise.catch(() => {
+                document.body.addEventListener("click", () => {
+                    audio.play();
+                }, {once:true});
+            });
+        }
+    });
+    </script>
+</body>
+</html>
